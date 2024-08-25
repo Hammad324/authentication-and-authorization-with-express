@@ -82,5 +82,7 @@ export const changeUsername = (req, res) => {
     res.status(200).json({
         message: `username successfully changed. Your new username is ${username}`
     })
-    // console.log(user.username)
+    // have to change this 
+    // take the username from user find the previous username with the help of cookie or header
+    // clear the previous token generate a new one with the new username 
 }
