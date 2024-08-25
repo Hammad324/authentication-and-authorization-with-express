@@ -1,17 +1,17 @@
 export const users = {
     1: {
-        username: "CharismaHunter",
-        email: "kyle@gamil.com",
+        username: "naruto",
+        email: "uzumaki@gamil.com",
         password: "pass123",
     },
     2: {
-        username: "jheengaSeven",
-        email: "jheenga@gamil.com",
+        username: "meliodas23d",
+        email: "eli@yohoo.com",
         password: "pass345",
     },
     3: {
-        username: "yambadeyy",
-        email: "juju@hutmail.com",
+        username: "tienisbald",
+        email: "yamcha@hatmail",
         password: "kk890",
     }
 }
