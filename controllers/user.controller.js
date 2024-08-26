@@ -1,6 +1,6 @@
 import { users } from "../models/user.model.js"
 import jwt from "jsonwebtoken";
-
+import fs from "fs";
 // login controller 
 export const userLogin = (req, res) => {
     const { email, password } = req.body; // extracting the info from body
@@ -22,6 +22,8 @@ export const userLogin = (req, res) => {
         `${process.env.JWT_TOKEN_SECRET_KEY}`,
         { expiresIn: '300s' } // dont know why is this not working
     )
+    
+    //fs.writeFile('user.model.js', token)
 
     const options = {
         httpOnly: true,
@@ -37,22 +39,25 @@ export const userLogin = (req, res) => {
 // view profile controller 
 
 export const view = (req, res) => {
-    const token = req.cookie; // gettinf the cookie
+    const token = req.cookie; // getting the cookie
     const user = req.user; // getting the user 
-    const auth = jwt.verify (token, `${process.env.JWT_TOKEN_SECRET_KEY}`) // verifying the cookie and unwraping the jwt to compare the user and auth
+    // const auth = jwt.verify (token, `${process.env.JWT_TOKEN_SECRET_KEY}`) // verifying the cookie and unwraping the jwt to compare the user and auth
     
-    
-    if (user.username == auth.username) { // comparision to make sure we give the correct user 
-        return res.status(200).json({
-            user: user,
-            message: "User Authenticated"
-        })
-    } else {
-        return res.status(400).json({
-            user: user,
-            message: "Unauthorized Request"
-        })
-    }
+    // if (user.username == auth.username) { // comparision to make sure we give the correct user 
+    //     return res.status(200).json({
+    //         user: user,
+    //         message: "User Authenticated"
+    //     })
+    // } else {
+    //     return res.status(400).json({
+    //         user: user,
+    //         message: "Unauthorized Request"
+    //     })
+    // }
+
+    res.status(200).json({
+        user, token
+    })
     
 }
 
@@ -82,6 +87,8 @@ export const changeUsername = (req, res) => {
     res.status(200).json({
         message: `username successfully changed. Your new username is ${username}`
     })
+    console.log(user)
+
     // have to change this 
     // take the username from user find the previous username with the help of cookie or header
     // clear the previous token generate a new one with the new username 
